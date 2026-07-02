@@ -1,5 +1,7 @@
 # samsung_wallet
 
+> Why: to reuse the Samsung Wallet "Add to Wallet" flow across Flutter apps without re-wrapping the native SDK every time.
+
 > Add cards to Samsung Wallet from your Flutter app — device support check, card clipping, and ready-to-use "Add to Samsung Wallet" buttons.
 
 [![pub package](https://img.shields.io/pub/v/samsung_wallet.svg)](https://pub.dev/packages/samsung_wallet)
@@ -12,9 +14,7 @@ A Flutter plugin that wraps the [Samsung Wallet](https://developer.samsung.com/w
 
 > **Platform support:** Android only. There is no iOS implementation.
 
-![demo](docs/demo.gif)
 
-<!-- TODO: add a real screenshot or demo GIF at docs/demo.gif -->
 
 ## ✨ Features
 
@@ -206,3 +206,8 @@ Please file bugs and feature requests on the [GitHub issue tracker](https://gith
 ## 📄 License
 
 BSD 2-Clause License. Copyright (c) 2023, Chan Seob Park. See [LICENSE](LICENSE).
+
+## Notes & Lessons
+
+- The device-availability check calls a Samsung REST endpoint. Running it on the main thread blocked the UI, so the native side runs it on a single-thread `ExecutorService` and posts the result back.
+- The 16 official Samsung Wallet button variants are bundled as package assets, so apps don't have to ship the artwork themselves.
